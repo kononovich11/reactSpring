@@ -1,0 +1,38 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 3%;
+}
+
+.app.cardList {
+  background-color: #d7e7e7;
+  padding: 5vh 25vw;
+  box-sizing: border-box;
+}
+
+.app.dark.cardList {
+  background-color: #262a2d;
+}
+
+.search {
+  width: 50%;
+  height: 2vh;
+  border-radius: 5%;
+  margin-bottom: 3vh;
+}
+
+@media screen and (max-width:1771px) {
+  .app.cardList {
+    padding: 5vh 13vw;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .gridContainer {
+    grid-template-columns: 100%;
+    margin-bottom: 2em;
+  }
+  .app.cardList {
+    padding: 2vh 5vw;
+  }
+}

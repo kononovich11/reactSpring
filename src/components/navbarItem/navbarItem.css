@@ -1,0 +1,12 @@
+.navbarItem {
+  list-style: none;
+  font-weight: bold;
+  font-size: 0.8em;
+  cursor: pointer;
+  display: flex;
+  align-items:center;
+}
+
+.arrow {
+  margin-left: 1vw;
+}

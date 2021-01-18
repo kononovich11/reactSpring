@@ -1,0 +1,39 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.hover {
+  background: #000;
+  height: 100vh;
+  color: #fff;
+  padding: 3vh;
+  font-size: 2em;
+}
+
+.multiply {
+  margin-left: 80vw;
+  height: 2vh;
+}
+
+.selectRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+  height: 5vh;
+}
+
+img {
+  cursor: pointer;
+}
+
+.selectTitle {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.selectedOptions {
+  color: #98afa9;
+  line-height: 1.5em;
+}

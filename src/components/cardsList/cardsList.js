@@ -18,6 +18,7 @@ const CardsList = ({cardsData, setInputValue, classNames}) => {
         onChange={getInputValue}/>
       <div className="gridContainer">
       {
+        cardsData.length === 0?  <div className="error">Sorry, your request was not found</div> :
         cardsData.map(item => {
           return <Card cardInfo={item} classNames={classNames}/>;
         })

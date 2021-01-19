@@ -1,7 +1,7 @@
 .navbarItem {
   list-style: none;
   font-weight: bold;
-  font-size: 0.8em;
+  font-size: 0.6em;
   cursor: pointer;
   display: flex;
   align-items:center;

@@ -89,7 +89,7 @@ const App = () => {
   
   useEffect(() => {
     let copyArr = [...cardsData];
-    let filterArr = copyArr.filter(item => {
+    const filterArr = copyArr.filter(item => {
       return item.title.includes(inputValue) || item.description.includes(inputValue);
     });
     setRenderCards(filterArr);
@@ -115,7 +115,7 @@ const App = () => {
         <Description/>
         <CardsList 
           classNames={classNames}
-          cardsData={renderCards?.length?renderCards:cardsData} 
+          cardsData={renderCards?.length?renderCards:renderCards?.length === 0 && inputValue?.length ? []  : cardsData} 
           setInputValue={setInputValue}
           />
       </div>

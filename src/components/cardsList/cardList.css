@@ -16,9 +16,10 @@
 
 .search {
   width: 50%;
-  height: 2vh;
+  height: 3vh;
   border-radius: 5%;
   margin-bottom: 3vh;
+  border: none;
 }
 
 @media screen and (max-width:1771px) {
@@ -34,5 +35,8 @@
   }
   .app.cardList {
     padding: 2vh 5vw;
+  }
+  .error {
+    font-size: 0.5em;
   }
 }

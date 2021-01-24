@@ -1,8 +1,31 @@
+.logo {
+  height: 4vh;
+}
+
+.navbarItem {
+  list-style: none;
+  font-weight: bold;
+  font-size: 0.6em;
+  cursor: pointer;
+  display: flex;
+  align-items:center;
+}
+
+.arrow {
+  margin-left: 1vw;
+}
+
+.navbar {
+  display: flex;
+  width: 70%;
+  justify-content: space-evenly;
+}
+
 .header {
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  height: 5vh;
+  height: 7vh;
   border-bottom: 1px solid #d7e7e7;
 }
 
@@ -33,6 +56,37 @@
 .iconMenu {
   display: none;
 }
+
+.hoverOptions {
+  display: none;
+}
+
+.selectedOptions.hoverItem {
+  color: #000;
+  margin: 1.5vh 0.5vw;
+}
+
+.hoverContainer {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  position: absolute;
+  top: 5vh;
+  z-index: 5; 
+}
+
+
+@media screen and (max-width:980px) {
+  .navbar {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .navbar {
+    display: none;
+  }
+}
+
 
 @media screen and (max-width:1771px) {
   .container {

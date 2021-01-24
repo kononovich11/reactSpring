@@ -5,6 +5,7 @@
 }
 
 .app.cardList {
+  height: 100vh;
   background-color: #d7e7e7;
   padding: 5vh 25vw;
   box-sizing: border-box;
@@ -20,6 +21,8 @@
   border-radius: 5%;
   margin-bottom: 3vh;
   border: none;
+  padding: 0.5em;
+  outline: none;
 }
 
 @media screen and (max-width:1771px) {
@@ -35,8 +38,64 @@
   }
   .app.cardList {
     padding: 2vh 5vw;
+    height: 150vh;
   }
   .error {
+    font-size: 0.5em;
+  }
+}
+
+
+.cardLogo {
+  height: 5vh;
+  margin: 2vh 1vw;
+  width: 4vw;
+}
+
+.app.cardList.card {
+  background-color: #fff;
+  display: flex;
+  font-size: 0.7em;
+  padding: 1em;
+  box-sizing: border-box;
+  color: #000;
+  height: 18vh;
+}
+
+.app.dark.cardList.card {
+  background-color: #000;
+  color: #fff;
+}
+
+.textContent {
+  font-size: 0.7em;
+  width: 30vw;
+  height: 30vh;
+}
+
+.cardLogo {
+  width: 5vw;
+  height: 7vh;
+}
+
+@media screen and (max-width:768px) {
+  .app.cardList.card {
+    height: 20vh;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .cardLogo {
+    width: 15vw;
+  }
+  .textContent {
+    width: 80%;
+    height: 7vh;
+    font-size: 0.7em;
+  }
+}
+
+@media screen and (max-width:377px) {
+  .textContent {
     font-size: 0.5em;
   }
 }

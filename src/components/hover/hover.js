@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 
-import arrow from '../icons/icons8-chevron-down-24.png';
+import arrow from '../header/icons8-chevron-down-24.png';
 import multiply from './icons8-multiply-24.png';
+import {clickMobileMenu, clickMenuItem} from '../../redux/actions';
 import './hover.css';
 
-const Hover = ({navbarData, setMobileMenu}) => {
-  const [clickedItem, setClickedItem] = useState(null);
+const Hover = () => {
+  const {navbarData, clickedItem} = useSelector(state => state);
+  const dispatch = useDispatch();
 
   return (
     <div className="hover">
@@ -13,7 +16,7 @@ const Hover = ({navbarData, setMobileMenu}) => {
         src={multiply} 
         className="multiply"
         alt="multiply"
-        onClick ={() => setMobileMenu(false)}/>  
+        onClick ={() => dispatch(clickMobileMenu(false))}/>  
       {
         navbarData.map(item => {
           return (
@@ -25,7 +28,7 @@ const Hover = ({navbarData, setMobileMenu}) => {
                   src={arrow} 
                   className="arrow" 
                   alt="arrow"
-                  onClick={() => {setClickedItem(item)}}/>
+                  onClick={() => {dispatch(clickMenuItem(item))}}/>
                 }
               </div>
               {

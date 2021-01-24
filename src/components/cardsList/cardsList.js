@@ -1,12 +1,27 @@
-import React from 'react';
-
-import Card from '../card';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {changeInputvalue, changeRenderCards} from '../../redux/actions';
 import './cardList.css';
 
-const CardsList = ({cardsData, setInputValue, classNames}) => {
-  classNames += ' cardList';
+const CardsList = () => {
+  const {cardsData, inputValue, renderCards, theme} = useSelector(state=>state);
+  const dispatch = useDispatch();
+  let classNames = 'app cardList';
+
+  useEffect(() => {
+    const copyArr = [...cardsData];
+    const filterArr = copyArr.filter(item => {
+      return item.title.includes(inputValue) || item.description.includes(inputValue);
+    });
+    dispatch(changeRenderCards(filterArr));
+  }, [inputValue]);
+
   const getInputValue = (e) => {
-    setInputValue(e.target.value);
+    dispatch(changeInputvalue(e.target.value));
+  }
+
+  if(theme === '1') {
+    classNames = 'app dark cardList';
   }
 
   return (
@@ -15,12 +30,21 @@ const CardsList = ({cardsData, setInputValue, classNames}) => {
         type="text"
         placeholder="Search" 
         className="search" 
-        onChange={getInputValue}/>
+        onChange={getInputValue}
+        />
       <div className="gridContainer">
       {
-        cardsData.length === 0?  <div className="error">Sorry, your request was not found</div> :
-        cardsData.map(item => {
-          return <Card cardInfo={item} classNames={classNames}/>;
+        renderCards.length === 0?  <div className="error">Sorry, your request was not found</div> :
+        renderCards.map(item => {
+          return (
+            <div className= 'app cardList card'>
+              <img src ={item.icon}  className="cardLogo" alt="cardLogo"/>
+              <div className="textContent">
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+              </div>
+            </div>
+          )
         })
       }
       </div>

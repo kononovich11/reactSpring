@@ -1,25 +1,29 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import { Provider } from 'react-redux';
+import {Route, Switch, Redirect} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import Home from './pages/home/home';
 import Login from './pages/login/login';
-import store from './redux/store';
+
 
 const App =  () => {
-  return (
-    <Provider store={store}>
-    <BrowserRouter>
+  const {creads} = useSelector((state) => state);
+
+  if(creads) {
+    return (
       <Switch>
-        <Route
-          path="/"
-          component={Home}
-          exact/>
+        <Route path="/" component={Home} exact/>
+        <Redirect to="/" />
+      </Switch>
+    )
+  }
+
+  return (
+      <Switch>
         <Route
           path="/login"
           component={Login}/>
+        <Redirect to="/login" />
       </Switch>
-    </BrowserRouter>
-    </Provider>
   );
 };
 

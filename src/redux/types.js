@@ -1,0 +1,4 @@
+export const SENT_CREADS = 'SENT_CREADS';
+export const CHECK_ERROR = 'CHECK_ERROR';
+export const CHANGE_THEME = 'CHANGE_THEME';
+export const CLICK_MOBILEMENU = 'CLICK_MOBILEMENU';

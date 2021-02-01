@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logotype from './spring-logo.svg';
 import iconMenu from './icons8-menu.svg';
 import arrow from './icons8-chevron-down-24.png';
 import {useSelector, useDispatch} from 'react-redux';
-import {changeTheme, clickMobileMenu, changeHoverFlag} from '../../redux/actions';
+import {changeTheme, clickMobileMenu} from '../../redux/actions';
 import './header.css';
 
 
 const Header = () => {
   const dispatch = useDispatch();
-  const {navbarData, hoverItem} = useSelector((state) => state);
+  const {navbarData} = useSelector((state) => state);
+  const [hoverItem, setHoverItem] = useState(null);
 
   const setTheme = (e) => {
     dispatch(changeTheme(e.target.value));
@@ -25,22 +26,22 @@ const Header = () => {
 
       <ul className="navbar">
       {
-        navbarData.map(item => {
-          return ( 
-          <li className="navbarItem">
-              <div 
+        navbarData.map((item, index) => {
+          return (
+          <li className="navbarItem" key={index}>
+              <div
                 className="navbarItemName"
                 onMouseOver={(e) => {
-                  dispatch(changeHoverFlag(item.name));
+                  setHoverItem(item.name);
                 }}>
                   {item.name}
-              <div className="hoverContainer">           
+              <div className="hoverContainer">
               {
                 item.showLinks && item.name === hoverItem && item?.options.map(option => {
                   return <div className="selectedOptions hoverItem">{option}</div>
                 })
-              } 
-              </div>    
+              }
+              </div>
               </div>
               {
                 item.showLinks && <img src={arrow} className="arrow" alt="arrow"/>
@@ -49,16 +50,16 @@ const Header = () => {
         })
       }
       </ul>
-    
-      <input 
-        type="range" 
-        min="1" 
+
+      <input
+        type="range"
+        min="1"
         max="2"
         className="range"
         onChange={setTheme}/>
-        <img 
+        <img
           src={iconMenu}
-          alt="iconMenu" 
+          alt="iconMenu"
           className="iconMenu"
           onClick={clickIcon}/>
     </div>

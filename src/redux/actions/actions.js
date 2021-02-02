@@ -3,7 +3,8 @@ import {
   CHECK_ERROR,
   CHANGE_THEME,
   CLICK_MOBILEMENU,
-} from './types';
+  LOADING_ERROR,
+} from '../types';
 
 const sentCreads = (creads) => {
   return {
@@ -33,9 +34,17 @@ const clickMobileMenu = (mobileMenu) => {
   };
 };
 
+const loadingError = (loadingError) => {
+  return {
+    type: LOADING_ERROR,
+    loadingError,
+  }
+};
+
 export {
   sentCreads,
   checkError,
   changeTheme,
   clickMobileMenu,
+  loadingError,
 }

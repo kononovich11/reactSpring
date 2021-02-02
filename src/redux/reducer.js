@@ -3,6 +3,11 @@ import {
   CHECK_ERROR,
   CHANGE_THEME,
   CLICK_MOBILEMENU,
+  DATA_POSTS_LOADING_START,
+  DATA_POSTS_LOADING_COMPLETED,
+  CHANGE_INPUT_VALUE,
+  FILTER_POSTS_COMPLETED,
+  LOADING_ERROR,
 } from './types';
 
 const navbarData = [
@@ -43,6 +48,11 @@ const initialState = {
   navbarData,
   theme: '2',
   mobileMenu: false,
+  dataPosts: [],
+  loading: false,
+  inputValue: null,
+  filterPosts: [],
+  loadingError: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -67,6 +77,40 @@ const reducer = (state = initialState, action) => {
         ...state,
         mobileMenu: action.mobileMenu,
       };
+    case DATA_POSTS_LOADING_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DATA_POSTS_LOADING_COMPLETED:
+      return {
+        ...state,
+        loading: false,
+        dataPosts: action.dataPosts
+      };
+
+      case CHANGE_INPUT_VALUE:
+        return {
+          ...state,
+          // loading: true,
+          inputValue: action.inputValue,
+        };
+
+      case FILTER_POSTS_COMPLETED:
+        return {
+          ...state,
+          // loading: false,
+          filterPosts: action.filterPosts,
+        };
+
+      case LOADING_ERROR:
+        return {
+          ...state,
+          loading: false,
+          dataPosts: [],
+          loadingError: action.loadingError,
+        }
+
       default: return state;
   }
 };

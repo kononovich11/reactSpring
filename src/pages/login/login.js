@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {sentCreads, checkError} from '../../redux/actions';
+import {sentCreads, checkError} from '../../redux/actions/actions';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 import './login.css';

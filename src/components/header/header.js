@@ -3,7 +3,7 @@ import logotype from './spring-logo.svg';
 import iconMenu from './icons8-menu.svg';
 import arrow from './icons8-chevron-down-24.png';
 import {useSelector, useDispatch} from 'react-redux';
-import {changeTheme, clickMobileMenu} from '../../redux/actions';
+import {changeTheme, clickMobileMenu} from '../../redux/actions/actions';
 import './header.css';
 
 

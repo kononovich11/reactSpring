@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import arrow from '../header/icons8-chevron-down-24.png';
 import multiply from './icons8-multiply-24.png';
-import {clickMobileMenu} from '../../redux/actions';
+import {clickMobileMenu} from '../../redux/actions/actions';
 import './hover.css';
 
 const Hover = () => {

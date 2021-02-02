@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../loader/Loader';
 import axios from 'axios';
 import './cardList.css';
@@ -11,43 +11,33 @@ import icon4 from '../icons/spring-cloud.svg';
 import icon5 from '../icons/spring-data-flow.svg';
 import icon6 from '../icons/spring-security.svg';
 
+import {loadingDataPosts} from '../../redux/actions/loadingDataPosts';
+import {changeInput} from '../../redux/actions/changeInput';
+
 
 const CardsList = () => {
   const icons = [icon1, icon2, icon3, icon4, icon5, icon6];
-  const {theme} = useSelector(state=>state);
-
-  const [cardsData, setCardsData] = useState(null);
-  const [renderData, setRenderData] = useState(null);
-  const [inputValue, setInputValue] = useState('');
+  const {theme,loading, dataPosts, filterPosts, inputValue, loadingError} = useSelector(state=>state);
+  const dispatch = useDispatch();
 
   let classNames = 'app cardList';
+  const renderPosts = filterPosts?.length ? filterPosts :dataPosts;
 
   useEffect(() => {
-    axios.get('http://localhost:3002')
-      .then(res => {
-        setCardsData(res.data);
-        setRenderData(res.data);
-      });
+    dispatch(loadingDataPosts(axios));
   }, []);
-
-  useEffect(() => {
-    if(inputValue !== '') {
-      axios.get(`http://localhost:3002/search?inputValue=${inputValue}`)
-        .then(async res => {
-        await setRenderData(res.data);
-      });
-    }
-  }, [inputValue]);
 
 
   if(theme === '1') {
     classNames = 'app dark cardList';
   }
 
-
-  if (!cardsData?.length) {
-    return <Loader/>
+  if(loadingError) {
+    return (
+      <div>Sorry, but something went wrong</div>
+    );
   } else {
+
     return (
       < div className={classNames}>
         <input
@@ -55,12 +45,12 @@ const CardsList = () => {
           placeholder="Search"
           className="search"
           name="search"
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => dispatch(changeInput(e.target.value, axios))}
           />
-        <div className="gridContainer">
+        {loading? <Loader/>:<div className="gridContainer">
         {
-          renderData?.length === 0?  <div className="error">Sorry, your request was not found</div> :
-          renderData?.map((item,index) => {
+          filterPosts?.length === 0  && inputValue !== null? <div className="error">Sorry, your request was not found</div> :
+          renderPosts?.map((item,index) => {
             return (
               <div className= 'app cardList card' key = {index}>
                 <img src={icons[index]} className="cardLogo" alt="cardLogo"/>
@@ -72,10 +62,11 @@ const CardsList = () => {
             )
           })
         }
-        </div>
+        </div> }
       </div>
     );
   }
+
 }
 
 export default CardsList;

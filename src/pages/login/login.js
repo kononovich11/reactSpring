@@ -1,14 +1,13 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {sentCreads, checkError} from '../../redux/actions/actions';
 import {withRouter} from 'react-router-dom';
-import axios from 'axios';
+import {sendLoginData} from '../../redux/actions/sendLoginData';
 import './login.css';
 
 
 const Login = ({history}) => {
   const dispatch = useDispatch();
-  const {errorLogin} = useSelector(state => state);
+  const {errorLogin, checkedUser} = useSelector(state => state);
 
   let userName = null;
   let password = null;
@@ -18,8 +17,6 @@ const Login = ({history}) => {
   }
 
 const submitData = async (e) => {
-    let status = null;
-
     e.preventDefault();
     const itemsForm = [...e.target.children];
     itemsForm.forEach(item => {
@@ -30,32 +27,35 @@ const submitData = async (e) => {
       }
     });
 
-   await axios.post('http://localhost:3002', {userName, password})
-      .then(response => {
-        status = response.status;
-      });
-
-    if(status === 200) {
-      dispatch(sentCreads({userName, password}));
-      history.push('/');
-    } else {
-      dispatch(checkError(true));
-    }
+    dispatch(sendLoginData({userName, password}));
+  }
+  
+  if(checkedUser) {
+    history.push('/');
   }
 
   return (
-    <div className="loginContainer">
+    <div className="formContainer">
     <div className="login">
     <h1>Login Form</h1>
+      { errorLogin && <div className="errorLogin">{errorLogin}</div> }
       <form className="form" onSubmit={submitData}>
-      { errorLogin && <div className="errorLogin">Sorry, but you have error in the user name or the password. Try again!</div> }
         <label htmlFor="userName">Enter user name:</label>
         <input type="text" id="userName" className="inputLogin" placeholder="UserName" name="userName"/>
         <label htmlFor="password">Enter password:</label>
         <input type="password" id="password" className="inputLogin" placeholder="Password" name="password"/>
         <button type="submit" className="submitBtn">Submit</button>
       </form>
-    </div>
+      
+        <div className="regAccount">
+          You are haven't account?
+          <button 
+              className="btnReg"
+              onClick={() => {history.push('/signup')}}>
+                  Click me!
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

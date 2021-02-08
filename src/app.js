@@ -3,32 +3,28 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import Home from './pages/home/home';
 import Login from './pages/login/login';
-// import {useHistory} from 'react-router-dom';
-
+import SignUp from './pages/signUp/signUp';
 
 const App =  () => {
-  const {creads} = useSelector((state) => state);
+  const {checkedUser} = useSelector((state) => state);
+  
+  return (
+    <Switch>
+      <Route
+        path="/"
+        exact
+        render={() => {
+          return checkedUser? <Redirect to="/home"/>  :
+          <Redirect to="/login"/>;
+        }}
+      />
+      <Route path="/home" component={Home} exact/> 
+     <Route path="/signup" component={SignUp} exact/> 
+     <Route path="/login" component={Login} exact/> 
 
-  const isLogIn = localStorage.getItem('isLogIn')
+   </Switch>
+  )
 
-  if(creads || isLogIn) {
-    localStorage.setItem('isLogIn', true);
-    return (
-      <Switch>
-        <Route path="/" component={Home} exact/>
-        <Redirect to="/" />
-      </Switch>
-    )
-  } else {
-    return (
-        <Switch>
-          <Route
-            path="/login"
-            component={Login}/>
-          <Redirect to="/login" />
-        </Switch>
-    );
-  }
 };
 
 export default App;

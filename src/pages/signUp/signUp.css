@@ -1,0 +1,55 @@
+.form {
+    margin-top: 5vh;
+}
+.signUp {
+    height: 85vh;
+    width: 35vw;
+    justify-content: flex-start;
+}
+
+h1 {
+    font-size: 1.2em;
+    margin-bottom: 1.5vh;
+}
+
+label {
+    margin-bottom: 0.7vh;
+    font-size: 0.75em;
+}
+
+input {
+    margin-bottom: 1.5vh; 
+    padding: 1vh;
+    border: 1px solid #29967c;
+}
+
+.signupErr {
+   font-size: 0.5em;
+   color: red; 
+}
+
+.regAccount {
+    font-size: 2vh;
+    margin-top: 2vh;
+    text-align: center;
+}
+
+.btnReg {
+    background-color: transparent;
+    border: 1px solid #29967c;
+    border-radius: 5%;
+    cursor: pointer;
+    padding: 1vh;
+    margin-left: 1vw;
+}
+
+.btnReg:hover {
+    color:violet;
+    outline: none;
+}
+
+@media screen and (max-width:1294px) {
+    h1 {
+        font-size: 1em;
+    }
+  }

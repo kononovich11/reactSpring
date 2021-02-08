@@ -1,6 +1,7 @@
 import {loadingError} from './actions';
+import axios from 'axios';
 
-export const loadingDataPosts = (axios) => async (dispatch) => {
+export const loadingDataPosts = () => async (dispatch) => {
 
   dispatch({
     type:'DATA_POSTS_LOADING_START',

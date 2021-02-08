@@ -1,4 +1,4 @@
-.login {
+.login, .signUp {
   width: 30vw;
   height: 50vh;
   border: 1px solid green;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.loginContainer {
+.formContainer {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(45deg, #29967c, #10a857);
@@ -50,7 +50,8 @@
 
 .errorLogin {
   color: #e32e41;
-  font-size: 0.7em;
+  font-size: 1.2em;
+  width: 20vw;
 }
 
 @media screen and (max-width:1250px) {

@@ -4,6 +4,7 @@ import {
   CHANGE_THEME,
   CLICK_MOBILEMENU,
   LOADING_ERROR,
+  SUCCESS_ADDING,
 } from '../types';
 
 const sentCreads = (creads) => {
@@ -17,7 +18,7 @@ const checkError = (errorLogin) => {
   return {
     type: CHECK_ERROR,
     errorLogin,
-  };
+  }; 
 };
 
 const changeTheme = (theme) => {
@@ -41,10 +42,18 @@ const loadingError = (loadingError) => {
   }
 };
 
+const successAdding = (successAdding) => {
+  return {
+    type: SUCCESS_ADDING,
+    successAdding,
+  }
+};
+
 export {
   sentCreads,
   checkError,
   changeTheme,
   clickMobileMenu,
   loadingError,
+  successAdding,
 }

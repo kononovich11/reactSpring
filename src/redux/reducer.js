@@ -8,6 +8,10 @@ import {
   CHANGE_INPUT_VALUE,
   FILTER_POSTS_COMPLETED,
   LOADING_ERROR,
+  SEND_SIGNUP_DATA,
+  REGISTRATED_USER_ERROR,
+  SUCCESS_ADDING,
+  CHECKED_USER
 } from './types';
 
 const navbarData = [
@@ -53,9 +57,13 @@ const initialState = {
   inputValue: null,
   filterPosts: [],
   loadingError: null,
+  requestDataSignup: null,
+  registrationErr: null,
+  successAdding: null,
+  checkedUser: null,
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action, payload) => {
   switch (action.type) {
     case SENT_CREADS:
       return {
@@ -109,7 +117,35 @@ const reducer = (state = initialState, action) => {
           loading: false,
           dataPosts: [],
           loadingError: action.loadingError,
+        };
+
+      case SEND_SIGNUP_DATA: {
+        return {
+          ...state,
+          requestDataSignup: action.objErrors,
         }
+      };
+
+      case REGISTRATED_USER_ERROR: {
+        return {
+          ...state,
+          registrationErr: action.errRegUser,
+        }
+      };
+
+      case SUCCESS_ADDING: {
+        return {
+          ...state,
+          successAdding: action.successAdding,
+        }
+      };
+
+      case CHECKED_USER: {
+        return {
+          ...state,
+          checkedUser: action.payload,
+        }
+      };
 
       default: return state;
   }

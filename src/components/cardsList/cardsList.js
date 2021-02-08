@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../loader/Loader';
 import axios from 'axios';
@@ -19,12 +20,13 @@ const CardsList = () => {
   const icons = [icon1, icon2, icon3, icon4, icon5, icon6];
   const {theme,loading, dataPosts, filterPosts, inputValue, loadingError} = useSelector(state=>state);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   let classNames = 'app cardList';
   const renderPosts = filterPosts?.length ? filterPosts :dataPosts;
 
   useEffect(() => {
-    dispatch(loadingDataPosts(axios));
+    dispatch(loadingDataPosts());
   }, []);
 
 
@@ -45,7 +47,9 @@ const CardsList = () => {
           placeholder="Search"
           className="search"
           name="search"
-          onChange={(e) => dispatch(changeInput(e.target.value, axios))}
+          onChange={(e) => {
+            dispatch(changeInput(e.target.value));
+          }}
           />
         {loading? <Loader/>:<div className="gridContainer">
         {

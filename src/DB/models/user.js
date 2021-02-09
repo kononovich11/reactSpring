@@ -80,7 +80,6 @@ sequelize.sync().then(()=>{
   console.log('connection db');
 })
 .catch(err=> {
-    console.log('&&&&&&')
     console.log(err);
 });
 

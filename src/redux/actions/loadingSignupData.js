@@ -13,10 +13,16 @@ export const loadingSignupData = (payload) => async (dispatch) => {
       })
     }
     const errors = response.data.errors;
+    console.log(errors);
     const objErrors = {};
+   // const itemPath = errors?.map(item => item.path);
     errors?.map(item => {
+      //const errorsData = Object.assign(...idInputs.map((key,index) => ({[key]: valuesInputs[index]})));
+      // Object.assign(objErrors, {[item.path]: item.message});
       Object.defineProperty(objErrors, item.path, { value: item.message, configurable: true, writable: true, enumerable: true });
     });
+
+    console.log(objErrors);
 
     if(response.data.success?.length) {
       dispatch(successAdding(response.data.success));

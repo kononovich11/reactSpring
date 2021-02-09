@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadingSignupData} from '../../redux/actions/loadingSignupData';
+import FieldSignup from '../../components/fieldSignup/fieldSignup';
 import '../login/login.css';
 import './signUp.css';
 
@@ -15,11 +16,20 @@ const SignUp = () => {
     useEffect(() => {
         dispatch(loadingSignupData(signupObj)); 
       }, [signupObj]);
+
+    const inputData = [
+        { for: 'userName',value: 'Enter username:', type: 'text', placeholder: 'User Name'},
+        { for: 'password',value: 'Enter password:', type: 'password', placeholder: 'Password'},
+        { for: 'passwordR',value: 'Repeat password:', type: 'password', placeholder: 'Password'},
+        { for: 'firstName',value: 'Enter first name:', type: 'text', placeholder: 'First Name'},
+        { for: 'lastName',value: 'Enter last name:', type: 'text', placeholder: 'Last Name'},
+        { for: 'age',value: 'Enter age:', type: 'number', placeholder: 'Age'},
+    ];
  
     const sendDataSignup = async(e) => {
         e.preventDefault();
-        const idInputs = [...document.getElementsByTagName('input')].map(item => item.id);
-        const valuesInputs = [...document.getElementsByClassName('signup')].map(item => item.value);
+        const idInputs = inputData.map(item => item.for); 
+        const valuesInputs = [...e.target].filter(item => item.className === 'signup').map(item => item.value);
         const sendingData = Object.assign(...idInputs.map((key,index) => ({[key]: valuesInputs[index]})));
         setSignupObj(sendingData);    
     }
@@ -34,24 +44,13 @@ const SignUp = () => {
             <form onSubmit={sendDataSignup} className="form">
                 <h1>Create a New Account</h1>
                 {registrationErr && <div>Sorry, but user name exist</div>}
-                <label for="userName">Enter username:</label>
-                {requestDataSignup && <div className="signupErr">{requestDataSignup.firstName}</div>}
-                <input type="text" placeholder="User Name" name="userName" id="userName" className="signup"/>
-                <label for="password">Enter password:</label>
-                {requestDataSignup && <div className="signupErr">{requestDataSignup.passwordRepeat}</div>}
-                <input type="password" placeholder="Password" name="password" id="password" className="signup"/>
-                <label for="passwordR">Repeat password:</label>
-                {requestDataSignup && <div className="signupErr">{requestDataSignup.lastName}</div>}
-                <input type="password" placeholder="Password" name="passwordRepeat" id="passwordRepeat" className="signup"/>
-                <label for="firstName">Enter first name:</label>
-                {requestDataSignup && <div className="signupErr">{requestDataSignup.firstName}</div>}
-                <input type="text" placeholder="First Name" name="firstName" id="firstName" className="signup"/>
-                <label for="lastName">Enter last name:</label>
-                {requestDataSignup && <div className="signupErr">{requestDataSignup.lastName}</div>}
-                <input type="text" placeholder="Last Name" name="lastName" id="lastName" className="signup"/>
-                <label for="age">Enter age:</label>
-                {requestDataSignup && <div className="signupErr">{requestDataSignup.age}</div>}
-                <input type="number" placeholder="Age" name="age" id="age" className="signup"/>
+                {
+                    inputData.map(item => {
+                        return (
+                            <FieldSignup dataInput={item}/>
+                        )
+                    })
+                }
                 <button type="submit" className="submitBtn">Submit</button>
                 <div className="regAccount">
                     You are already have account?

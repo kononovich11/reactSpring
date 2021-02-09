@@ -11,7 +11,7 @@ import {
   SEND_SIGNUP_DATA,
   REGISTRATED_USER_ERROR,
   SUCCESS_ADDING,
-  CHECKED_USER
+  CHECKED_USER,
 } from './types';
 
 const navbarData = [
@@ -119,33 +119,29 @@ const reducer = (state = initialState, action, payload) => {
           loadingError: action.loadingError,
         };
 
-      case SEND_SIGNUP_DATA: {
+      case SEND_SIGNUP_DATA:
         return {
           ...state,
           requestDataSignup: action.objErrors,
-        }
-      };
+        };
 
-      case REGISTRATED_USER_ERROR: {
+      case REGISTRATED_USER_ERROR:
         return {
           ...state,
           registrationErr: action.errRegUser,
-        }
-      };
+        };
 
-      case SUCCESS_ADDING: {
+      case SUCCESS_ADDING:
         return {
           ...state,
           successAdding: action.successAdding,
-        }
-      };
+        };
 
-      case CHECKED_USER: {
+      case CHECKED_USER:
         return {
           ...state,
           checkedUser: action.payload,
-        }
-      };
+        };
 
       default: return state;
   }

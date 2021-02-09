@@ -1,7 +1,7 @@
 'use strict';
 
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('mydb', 'root', 'mysql11', {
+const sequelize = new Sequelize('springDB', 'root', 'mysql11', {
   dialect: 'mysql',
   host: 'localhost'
 });
@@ -34,7 +34,7 @@ const User = sequelize.define('user', {
               if(!flag) {
                 throw new Error('Password must be atleast number and symbol');
               }
-          }, 
+          },
       },
   },
   passwordRepeat: {
@@ -74,7 +74,7 @@ const User = sequelize.define('user', {
           },
       },
   },
-});   
+});
 
 sequelize.sync().then(()=>{
   console.log('connection db');

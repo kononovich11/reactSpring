@@ -29,7 +29,7 @@ const submitData = async (e) => {
 
     dispatch(sendLoginData({userName, password}));
   }
-  
+
   if(checkedUser) {
     history.push('/');
   }
@@ -46,10 +46,10 @@ const submitData = async (e) => {
         <input type="password" id="password" className="inputLogin" placeholder="Password" name="password"/>
         <button type="submit" className="submitBtn">Submit</button>
       </form>
-      
+
         <div className="regAccount">
           You are haven't account?
-          <button 
+          <button
               className="btnReg"
               onClick={() => {history.push('/signup')}}>
                   Click me!

@@ -7,7 +7,7 @@ import SignUp from './pages/signUp/signUp';
 
 const App =  () => {
   const {checkedUser} = useSelector((state) => state);
-  
+
   return (
     <Switch>
       <Route
@@ -18,9 +18,9 @@ const App =  () => {
           <Redirect to="/login"/>;
         }}
       />
-      <Route path="/home" component={Home} exact/> 
-     <Route path="/signup" component={SignUp} exact/> 
-     <Route path="/login" component={Login} exact/> 
+     <Route path="/home" component={Home} exact/>
+     <Route path="/signup" component={SignUp} exact/>
+     <Route path="/login" component={Login} exact/>
 
    </Switch>
   )

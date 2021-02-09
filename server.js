@@ -1,7 +1,6 @@
-const {Card} = require('./src/DB/models/card'); 
+const {Card} = require('./src/DB/models/card');
 const {User} = require('./src/DB/models/user');
 const express= require('express');
-const Joi = require('@hapi/joi');
 const crypto = require('crypto');
 
 const app = express();
@@ -25,16 +24,19 @@ app.get('/', async (req, res) => {
 
 app.post('/signup', async(req, res) => {
   let redistratedUser = false;
-  const key = crypto.pbkdf2Sync(req.body.password , 'salt', 100000, 64, 'sha512').toString('hex') ;
-  console.log(key);
-  req.body.password = key;
-  req.body.passwordRepeat = key;
+  const key1 = crypto.pbkdf2Sync(req.body.password , 'salt', 100000, 64, 'sha512').toString('hex') ;
+  const key2 = crypto.pbkdf2Sync(req.body.passwordR , 'salt', 100000, 64, 'sha512').toString('hex') ;
+  req.body.password = key1;
+  req.body.passwordR = key2;
+  if(req.body.password !== req.body.passwordR) {
+    res.send({errorPasswords: 'password not equels'});
+  }
   console.log(req.body);
   await User.findOne({where: {userName: req.body.userName}})
   .then((data) => {
     redistratedUser = data? true : false;
   });
-  
+
   if(!redistratedUser) {
      User.create(req.body)
       .then(() => res.send({success: 'thank you for registration'}))
@@ -60,7 +62,7 @@ app.post('/login', async (req, res, next) => {
   } else {
     res.send({checkUser});
   }
-});  
+});
 
 app.get('/home', (req, res) => {
   const inputValue = req.query.inputValue;
@@ -69,7 +71,6 @@ app.get('/home', (req, res) => {
     const filterArr = data.filter(item => {
     return item.dataValues.title.includes(inputValue) || item.dataValues.description.includes(inputValue);
    });
-   console.log(filterArr)
    res.send(filterArr);
   });
 });

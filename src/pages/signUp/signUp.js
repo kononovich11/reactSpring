@@ -8,13 +8,13 @@ import './signUp.css';
 
 
 const SignUp = () => {
-    const {requestDataSignup, registrationErr, successAdding} = useSelector(state=>state);
+    const {registrationErr, successAdding} = useSelector(state=>state);
     const dispatch = useDispatch();
     const history = useHistory();
     const [signupObj, setSignupObj] = useState(null);
 
     useEffect(() => {
-        dispatch(loadingSignupData(signupObj)); 
+        dispatch(loadingSignupData(signupObj));
       }, [signupObj]);
 
     const inputData = [
@@ -25,17 +25,17 @@ const SignUp = () => {
         { for: 'lastName',value: 'Enter last name:', type: 'text', placeholder: 'Last Name'},
         { for: 'age',value: 'Enter age:', type: 'number', placeholder: 'Age'},
     ];
- 
+
     const sendDataSignup = async(e) => {
         e.preventDefault();
-        const idInputs = inputData.map(item => item.for); 
+        const idInputs = inputData.map(item => item.for);
         const valuesInputs = [...e.target].filter(item => item.className === 'signup').map(item => item.value);
         const sendingData = Object.assign(...idInputs.map((key,index) => ({[key]: valuesInputs[index]})));
-        setSignupObj(sendingData);    
+        setSignupObj(sendingData);
     }
 
     if (successAdding?.length) {
-        history.push('/login'); 
+        history.push('/login');
     }
 
     return (
@@ -54,7 +54,7 @@ const SignUp = () => {
                 <button type="submit" className="submitBtn">Submit</button>
                 <div className="regAccount">
                     You are already have account?
-                    <button 
+                    <button
                         className="btnReg"
                         onClick={() => {history.push('/login')}}>
                             Click me!

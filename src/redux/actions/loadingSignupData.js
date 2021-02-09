@@ -4,7 +4,6 @@ import {successAdding} from '../actions/actions';
 export const loadingSignupData = (payload) => async (dispatch) => {
   const requestSignup = await axios.post('http://localhost:3002/signup',payload)
   .then(response => {
-    console.log(response);
     const errRegUser = response.data.errorUser;
     if(errRegUser?.length) {
       dispatch({
@@ -13,13 +12,10 @@ export const loadingSignupData = (payload) => async (dispatch) => {
       })
     }
     const errors = response.data.errors;
+    let objErrors = {};
     console.log(errors);
-    const objErrors = {};
-   // const itemPath = errors?.map(item => item.path);
-    errors?.map(item => {
-      //const errorsData = Object.assign(...idInputs.map((key,index) => ({[key]: valuesInputs[index]})));
-      // Object.assign(objErrors, {[item.path]: item.message});
-      Object.defineProperty(objErrors, item.path, { value: item.message, configurable: true, writable: true, enumerable: true });
+    errors?.forEach(item => {
+      Object.assign(objErrors, {[item.path]: item.message});
     });
 
     console.log(objErrors);
@@ -27,7 +23,6 @@ export const loadingSignupData = (payload) => async (dispatch) => {
     if(response.data.success?.length) {
       dispatch(successAdding(response.data.success));
     }
- 
     dispatch({
       type:'SEND_SIGNUP_DATA',
       objErrors,

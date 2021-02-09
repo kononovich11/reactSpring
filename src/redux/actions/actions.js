@@ -18,7 +18,7 @@ const checkError = (errorLogin) => {
   return {
     type: CHECK_ERROR,
     errorLogin,
-  }; 
+  };
 };
 
 const changeTheme = (theme) => {

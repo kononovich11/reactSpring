@@ -57,10 +57,17 @@ const initialState = {
   inputValue: null,
   filterPosts: [],
   loadingError: null,
-  requestDataSignup: null,
   registrationErr: null,
   successAdding: null,
   checkedUser: null,
+  requestDataSignup: {
+    age: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    passwordRepeat: "",
+    userName: "",
+  },
 };
 
 const reducer = (state = initialState, action, payload) => {

@@ -13,12 +13,10 @@ export const loadingSignupData = (payload) => async (dispatch) => {
     }
     const errors = response.data.errors;
     let objErrors = {};
-    console.log(errors);
+
     errors?.forEach(item => {
       Object.assign(objErrors, {[item.path]: item.message});
     });
-
-    console.log(objErrors);
 
     if(response.data.success?.length) {
       dispatch(successAdding(response.data.success));

@@ -25,10 +25,10 @@ app.get('/', async (req, res) => {
 app.post('/signup', async(req, res) => {
   let redistratedUser = false;
   const key1 = crypto.pbkdf2Sync(req.body.password , 'salt', 100000, 64, 'sha512').toString('hex') ;
-  const key2 = crypto.pbkdf2Sync(req.body.passwordR , 'salt', 100000, 64, 'sha512').toString('hex') ;
+  const key2 = crypto.pbkdf2Sync(req.body.passwordRepeat , 'salt', 100000, 64, 'sha512').toString('hex') ;
   req.body.password = key1;
-  req.body.passwordR = key2;
-  if(req.body.password !== req.body.passwordR) {
+  req.body.passwordRepeat = key2;
+  if(req.body.password !== req.body.passwordRepeat) {
     res.send({errorPasswords: 'password not equels'});
   }
   console.log(req.body);
@@ -38,6 +38,7 @@ app.post('/signup', async(req, res) => {
   });
 
   if(!redistratedUser) {
+    console.log('need')
      User.create(req.body)
       .then(() => res.send({success: 'thank you for registration'}))
       .catch(err => {

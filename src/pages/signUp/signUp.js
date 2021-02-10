@@ -12,26 +12,40 @@ const SignUp = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [signupObj, setSignupObj] = useState(null);
+    const [form, setForm] = useState([]);
 
-    useEffect(() => {
-        dispatch(loadingSignupData(signupObj));
-      }, [signupObj]);
+    const filtered = {
+        age: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+        passwordRepeat: "",
+        userName: "",
+    };
 
     const inputData = [
         { for: 'userName',value: 'Enter username:', type: 'text', placeholder: 'User Name'},
         { for: 'password',value: 'Enter password:', type: 'password', placeholder: 'Password'},
-        { for: 'passwordR',value: 'Repeat password:', type: 'password', placeholder: 'Password'},
+        { for: 'passwordRepeat',value: 'Repeat password:', type: 'password', placeholder: 'Password'},
         { for: 'firstName',value: 'Enter first name:', type: 'text', placeholder: 'First Name'},
         { for: 'lastName',value: 'Enter last name:', type: 'text', placeholder: 'Last Name'},
         { for: 'age',value: 'Enter age:', type: 'number', placeholder: 'Age'},
     ];
 
+
+    useEffect(() => {
+        dispatch(loadingSignupData(signupObj));
+      }, [signupObj]);
+
+
     const sendDataSignup = async(e) => {
         e.preventDefault();
-        const idInputs = inputData.map(item => item.for);
-        const valuesInputs = [...e.target].filter(item => item.className === 'signup').map(item => item.value);
-        const sendingData = Object.assign(...idInputs.map((key,index) => ({[key]: valuesInputs[index]})));
-        setSignupObj(sendingData);
+        form.forEach(item => {
+            let key = Object.keys(item)[0];
+            filtered[key] = item[key];
+        });
+
+        setSignupObj(filtered);
     }
 
     if (successAdding?.length) {
@@ -47,7 +61,11 @@ const SignUp = () => {
                 {
                     inputData.map(item => {
                         return (
-                            <FieldSignup dataInput={item}/>
+                            <FieldSignup
+                                dataInput={item}
+                                setForm={setForm}
+                                form={form}
+                                />
                         )
                     })
                 }
